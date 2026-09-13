@@ -30,7 +30,7 @@ env/
 
 # Output and results
 results/
-*.png
+#*.png
 
 # IDE / Editor
 .vscode/
