@@ -4,11 +4,11 @@
 
 | ファイル | 説明 |
 |---------|------|
-| [pyproject.toml](file:///c:/Users/sudak/src/bo/pyproject.toml) | プロジェクト定義・uv依存関係管理 |
-| [generate_dataset.py](file:///c:/Users/sudak/src/bo/generate_dataset.py) | 合成データセット生成（物理的傾向を反映したシミュレーション関数） |
-| [bayesian_optimization.py](file:///c:/Users/sudak/src/bo/bayesian_optimization.py) | ベイズ最適化メインスクリプト（scikit-optimize使用） |
-| [requirements.txt](file:///c:/Users/sudak/src/bo/requirements.txt) | 依存パッケージ (pip用互換) |
-| [README.md](file:///c:/Users/sudak/src/bo/README.md) | 使い方・カスタマイズガイド |
+| [pyproject.toml](pyproject.toml) | プロジェクト定義・uv依存関係管理 |
+| [generate_dataset.py](generate_dataset.py) | 合成データセット生成（物理的傾向を反映したシミュレーション関数） |
+| [bayesian_optimization.py](bayesian_optimization.py) | ベイズ最適化メインスクリプト（scikit-optimize使用） |
+| [requirements.txt](requirements.txt) | 依存パッケージ (pip用互換) |
+| [README.md](README.md) | 使い方・カスタマイズガイド |
 
 ## 探索空間と目的関数
 
@@ -41,23 +41,23 @@
 
 目的関数の最小値が評価回数とともに改善していく様子です。初期データ 20点の後、BO が効率的に最適領域を探索しています。
 
-![収束曲線](C:/Users/sudak/.gemini/antigravity/brain/72c77165-5b3a-48b4-b8d5-d2e63be0e3cf/convergence.png)
+![収束曲線](wt/convergence.png)
 
 ## 膜特性の推移
 
 各評価での膜特性の推移。後半では高い成膜レート・低い表面粗さの領域に集中して探索していることがわかります。
 
-![膜特性の推移](C:/Users/sudak/.gemini/antigravity/brain/72c77165-5b3a-48b4-b8d5-d2e63be0e3cf/property_evolution.png)
+![膜特性の推移](wt/property_evolution.png)
 
 ## 部分依存プロット
 
 ガウス過程モデルが学習したパラメータ間の関係性。対角線は各パラメータの単独効果、非対角は2パラメータ間の交互作用を示します。
 
-![部分依存プロット](C:/Users/sudak/.gemini/antigravity/brain/72c77165-5b3a-48b4-b8d5-d2e63be0e3cf/objective_landscape.png)
+![部分依存プロット](wt/objective_landscape.png)
 
 ## カスタマイズポイント
 
 - **実験データの利用**: 自分のデータを CSV 形式で `--initial-data` に指定可能
-- **目的関数の重み**: [bayesian_optimization.py](file:///c:/Users/sudak/src/bo/bayesian_optimization.py#L56-L61) の `WEIGHTS` を変更
-- **膜材料の変更**: [generate_dataset.py](file:///c:/Users/sudak/src/bo/generate_dataset.py) の `simulate_deposition()` を実際の実験モデルに置き換え
+- **目的関数の重み**: [bayesian_optimization.py](bayesian_optimization.py#L56-L61) の `WEIGHTS` を変更
+- **膜材料の変更**: [generate_dataset.py](generate_dataset.py) の `simulate_deposition()` を実際の実験モデルに置き換え
 - **獲得関数**: `--acq-func` で EI / PI / LCB / gp_hedge を切り替え
