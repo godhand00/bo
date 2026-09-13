@@ -229,6 +229,37 @@ uv run python bayesian_optimization.py --help
 | `--seed` | 42 | 乱数シード |
 | `--output-dir` | results | 出力ディレクトリ |
 
+### 3. パラメータ寄与度の分析（ランダムフォレスト）
+
+各成膜パラメータが膜特性にどの程度影響しているかを、ランダムフォレストの特徴量重要度で可視化します。
+
+```bash
+uv run python feature_importance.py
+```
+
+2 種類の重要度を算出します:
+
+| 手法 | 特徴 |
+|------|------|
+| **不純度ベース重要度 (MDI)** | ツリー分岐時の不純度減少量。計算が速いが、値域の広い特徴量を過大評価する傾向 |
+| **順列重要度 (Permutation)** | 特徴量をシャッフルしたときのスコア低下量。より信頼性が高い |
+
+**オプション:**
+
+| オプション | デフォルト | 説明 |
+|-----------|-----------|------|
+| `--data` | data/full_dataset.csv | 分析対象データセット |
+| `--n-estimators` | 200 | 決定木の数 |
+| `--seed` | 42 | 乱数シード |
+| `--output-dir` | results | 出力ディレクトリ |
+
+**出力ファイル:**
+
+- `feature_importance_mdi.png` — 不純度ベース重要度の横棒グラフ
+- `feature_importance_perm.png` — 順列重要度の横棒グラフ（誤差バー付き）
+- `feature_importance_heatmap.png` — 全膜特性 × 全パラメータのヒートマップ
+- `feature_importance.csv` — 重要度の数値データ
+
 ## 目的関数について
 
 4つの膜特性を重み付きスカラー値に統合しています:
